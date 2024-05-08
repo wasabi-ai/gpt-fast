@@ -126,8 +126,9 @@ class Transformer(nn.Module):
         freqs_cis = self.freqs_cis[input_pos]
         x = self.tok_embeddings(idx)
 
-        for i, layer in enumerate(self.layers):
-            x = layer(x, input_pos, freqs_cis, mask)
+        for _ in range(2):
+            for i, layer in enumerate(self.layers):
+                x = layer(x, input_pos, freqs_cis, mask)
         x = self.norm(x)
         logits = self.output(x)
         return logits
